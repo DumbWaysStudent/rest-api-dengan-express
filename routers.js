@@ -18,13 +18,17 @@ router.post('/heroes', function(req, res, next){
 });
 
 router.put('/heroes/:id', function(req, res){
-  res.send('PUT hero');
+  Heroes.findOneAndUpdate({_id: req.params.id}, req.body).then(function(result){
+    Heroes.findOne({_id: req.params.id}).then(function(hero){
+      res.send(hero);
+    });
+  });
 });
 
 router.delete('/heroes/:id', function(req, res){
   Heroes.findOneAndRemove({_id: req.params.id}).then(function(result){
     res.send(result);
-  });  
+  });
 });
 
 module.exports = router;
