@@ -3,7 +3,15 @@ const router = express.Router();
 const Heroes = require('./models/heroes');
 
 router.get('/heroes', function(req, res){
-  res.send('GET heroes');
+  Heroes.find({}).then(function(heroes){
+    res.send(heroes);
+  });
+});
+
+router.get('/heroes/:id', function(req, res){
+  Heroes.findOne({_id: '59a3dec6ad4b5109d0c75f4d'}).then(function(hero){
+    res.send(hero);
+  })
 });
 
 router.post('/heroes', function(req, res, next){
