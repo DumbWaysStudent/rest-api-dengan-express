@@ -14,6 +14,11 @@ app.use(bodyParser.json());
 //initialize routers
 app.use('/api', routers);
 
+//error middleware
+app.use(function(err, req, res, next){
+  res.status(422).send({err: err.message});
+});
+
 app.listen(process.env.port || 5000, function(){
   console.log('express app now listening requests');
 });
