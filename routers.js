@@ -6,7 +6,13 @@ router.get('/heroes', function(req, res){
 });
 
 router.post('/heroes', function(req, res){
-  res.send('POST hero');
+  const {name, role} = req.body;
+
+  res.send({
+    method: 'POST',
+    name: name,
+    role: role
+  });
 });
 
 router.put('/heroes/:id', function(req, res){
